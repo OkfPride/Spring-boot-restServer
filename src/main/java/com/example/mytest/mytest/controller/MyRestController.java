@@ -53,7 +53,7 @@ public class MyRestController {
         if (employee==null) {
              throw new MyException("there is not employee with id = "+id);
         }
-        meservise.delete(meservise.getEmployee(id)); 
+        meservise.delete(id); 
         return "Employee with id "+id+ " was deleted";
     }
     

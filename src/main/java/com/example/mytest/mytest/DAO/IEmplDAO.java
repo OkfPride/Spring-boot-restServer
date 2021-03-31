@@ -23,6 +23,6 @@ public interface IEmplDAO {
     
     Employee getEmployee(int id);
 
-    public void deleteEmployee(Employee employee);
+    public void deleteEmployee(int id);
 
 }

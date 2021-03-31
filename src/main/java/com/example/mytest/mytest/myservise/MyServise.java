@@ -49,8 +49,8 @@ public class MyServise implements IServise {
 
     @Override
     @Transactional
-    public void delete(Employee employee) {
-        employeeDAO.deleteEmployee(employee);
+    public void delete(int id) {
+        employeeDAO.deleteEmployee(id);
     }
     
 

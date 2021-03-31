@@ -1,17 +1,11 @@
 package com.example.mytest.mytest.DAO;
 
 import com.example.mytest.mytest.entity.Employee;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -22,7 +16,6 @@ public class EmployeeDAO implements IEmplDAO {
 
     @Autowired
     private EntityManager entityManager;
-    
 
     @Override
     public Employee addEmployee() {
@@ -32,29 +25,36 @@ public class EmployeeDAO implements IEmplDAO {
 
     @Override
     public List<Employee> showAllEmployees() {
-        Session currentSession = entityManager.unwrap(Session.class);
-        Query createQuery = currentSession.createQuery("from Employee", Employee.class);
+//        Session currentSession = entityManager.unwrap(Session.class);
+//        Query createQuery = currentSession.createQuery("from Employee", Employee.class);
+//        List resultList = createQuery.getResultList();
+//        return resultList;
+        Query createQuery = entityManager.createQuery("from Employee");
         List resultList = createQuery.getResultList();
         return resultList;
-
-//return null;
     }
 
     @Override
     public void saveEmployee(Employee employee) {
-        Session currentSession = entityManager.unwrap(Session.class);
-        currentSession.saveOrUpdate(employee);
+//        Session currentSession = entityManager.unwrap(Session.class);
+//        currentSession.saveOrUpdate(employee);
+        Employee merge = entityManager.merge(employee);
+        employee.setId(merge.getId());
 
     }
 
     @Override
-    public void deleteEmployee(Employee employee) {
-       entityManager.unwrap(Session.class).delete(employee); 
-    }  
- 
+    public void deleteEmployee(int id) {
+//        entityManager.unwrap(Session.class).delete(employee);
+        Query createQuery = entityManager.createQuery("DELETE FROM Employee where id=:setparam");
+        createQuery.setParameter("setparam", id);
+        createQuery.executeUpdate();
+    }
+
     public Employee getEmployee(int id) {
-        Session currentSession = entityManager.unwrap(Session.class);
-        Employee get = currentSession.get(Employee.class, id);
-        return get; 
+//        Session currentSession = entityManager.unwrap(Session.class);
+//        Employee get = currentSession.get(Employee.class, id);
+//        return get;
+        return entityManager.find(Employee.class, id);
     }
 }

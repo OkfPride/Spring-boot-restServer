@@ -22,5 +22,5 @@ public interface IServise {
 
     Employee getEmployee(int id);
  
-    void delete(Employee employee);
+    void delete(int id);
 }
