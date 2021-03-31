@@ -51,6 +51,7 @@ public class MyRestController {
     public String deleteEmployee(@PathVariable int id) {
         Employee employee = meservise.getEmployee(id);
         if (employee==null) {
+             throw new MyException("there is not employee with id = "+id);
         }
         meservise.delete(meservise.getEmployee(id)); 
         return "Employee with id "+id+ " was deleted";
