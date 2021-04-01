@@ -16,11 +16,11 @@ public interface IServise {
 
     List<Employee> showAllEmployees();
 
-    Employee add();
-
     void save(Employee employee);
 
     Employee getEmployee(int id);
- 
-    void delete(Employee employee);
+
+    void delete(int id);
+
+    public List<Employee> findAllByName(String name);
 }

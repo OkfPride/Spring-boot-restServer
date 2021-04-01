@@ -7,22 +7,16 @@ package com.example.mytest.mytest.DAO;
 
 import com.example.mytest.mytest.entity.Employee;
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.ui.Model;
 
 /**
  *
  * @author JavaDev
  */
-public interface IEmplDAO {
+public interface IEmplDAO extends JpaRepository<Employee, Integer>{
 
-    List<Employee> showAllEmployees();
+    public List<Employee>findAllByName(String name);
 
-    Employee addEmployee();
-    
-    void saveEmployee(Employee employee);
-    
-    Employee getEmployee(int id);
-
-    public void deleteEmployee(Employee employee);
 
 }
