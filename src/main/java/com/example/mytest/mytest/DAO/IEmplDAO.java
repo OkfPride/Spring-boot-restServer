@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
  */
 public interface IEmplDAO extends JpaRepository<Employee, Integer>{
 
-    public List<Employee>findAllByName(String name);
+
 
 
 }
