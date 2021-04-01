@@ -24,12 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSourse);
 
+//it works but its wrong  pattern
+//        UserBuilder userBuilder = User.withDefaultPasswordEncoder();
+//auth.inMemoryAuthentication().withUser(userBuilder.username("vasia").password("1234").roles("boss")).
+//        withUser(userBuilder.username("vasia2").password("1234").roles("boss2"));
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/**").hasAnyRole("boss").and().
-                formLogin().permitAll();
+        http.authorizeRequests().antMatchers("/actuator/info").hasAnyRole("BOSS").and().
+                formLogin();
 //        http
                 
 //                .authorizeRequests()
